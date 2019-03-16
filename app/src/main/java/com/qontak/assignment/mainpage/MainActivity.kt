@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.Movie
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,6 +45,20 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val item = menu?.findItem(R.id.action_search)
         main_search_view.setMenuItem(item)
+        main_search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    mainPresenter.getData(1, query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
 
         return true
     }
