@@ -12,6 +12,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".mainpage.MainActivity">
+        <activity
+            android:name=".detailpage.MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:parentActivityName=".mainpage.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.qontak.assignment.mainpage.MainActivity"/>
+        </activity>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

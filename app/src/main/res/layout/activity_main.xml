@@ -6,14 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainpage.MainActivity"
-    android:gravity="center"
     android:orientation="vertical">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recycler_view"
+    
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:clipToPadding="false"/>
-
+        android:theme="@style/AppTheme.AppBarOverlay">
+        
+        <FrameLayout android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+            </android.support.v7.widget.Toolbar>
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/main_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search"/>
+        </FrameLayout>
+        
+    </android.support.design.widget.AppBarLayout>
+    
 </LinearLayout>

@@ -39,6 +39,15 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main_search_view, menu)
+
+        val item = menu?.findItem(R.id.action_search)
+        main_search_view.setMenuItem(item)
+
+        return true
+    }
+
     override fun onDestroy() {
         mainPresenter.onDestroy()
         super.onDestroy()
