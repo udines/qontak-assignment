@@ -22,10 +22,7 @@ class MainActivityInteractor {
             .get()
             .build()
 
-        client.newCall(request).enqueue(object : Callback{
-            override fun onFailure(call: Call, e: IOException) {
-                onFinishedListener.onResultFail()
-            }
+        client.newCall(request).enqueue(object : Callback {
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d("response code", response.code().toString())
@@ -33,6 +30,35 @@ class MainActivityInteractor {
                 if (jsonData != null) {
                     onFinishedListener.onResultSuccess(jsonData)
                 }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                onFinishedListener.onResultFail()
+            }
+
+        })
+    }
+
+    fun searchMovieByTitle(onFinishedListener: OnFinishedListener, page: Int, title: String) {
+        val url = "https://api.themoviedb.org/3/search/movie?api_key=" + Constants.API_KEY + "&language=en-US&query=" + title + "&page=" + page.toString() + "&include_adult=false"
+
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+
+            override fun onResponse(call: Call, response: Response) {
+                val jsonData = response.body()?.string()
+                if (jsonData != null) {
+                    onFinishedListener.onResultSuccess(jsonData)
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                onFinishedListener.onResultFail()
             }
         })
     }
