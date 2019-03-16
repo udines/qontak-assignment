@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(com.qontak.assignment.R.layout.activity_main)
 
+        linearLayoutManager = GridLayoutManager(this, 2)
+        main_recycler_view.layoutManager = linearLayoutManager
+
         mainPresenter = MainActivityPresenter(this, MainActivityInteractor())
 
         //get initial movie list
@@ -25,11 +28,11 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showList(movieList: ArrayList<Movie>) {
-        linearLayoutManager = GridLayoutManager(this, 2)
-        main_recycler_view.layoutManager = linearLayoutManager
-        adapter = MovieListAdapter(this, movieList)
-        main_recycler_view.adapter = adapter
-        adapter.notifyDataSetChanged()
+        runOnUiThread {
+            // Stuff that updates the UI
+            adapter = MovieListAdapter(this, movieList)
+            main_recycler_view.adapter = adapter
+        }
     }
 
     override fun onDestroy() {
