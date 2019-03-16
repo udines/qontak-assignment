@@ -26,7 +26,7 @@ class MovieListAdapter(private val context: Context, private val movieList : Arr
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.title.text = movieList[p1].title
         GlideApp.with(context)
-            .load("https://image.tmdb.org/t/p/w500" + movieList[p1].poster_path)
+            .load("https://image.tmdb.org/t/p/w300" + movieList[p1].poster_path)
             .into(p0.image)
     }
 
