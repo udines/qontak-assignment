@@ -22,6 +22,7 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
     fun getData(page: Int, filter: String) {
         when (filter) {
             Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, page)
+            else -> mainInteractor.searchMovieByTitle(this, page, filter)
         }
     }
 
