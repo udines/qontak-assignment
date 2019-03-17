@@ -2,8 +2,10 @@ package com.qontak.assignment.detailpage
 
 import android.util.Log
 import com.google.gson.Gson
+import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.MovieCredit
 import com.qontak.assignment.datamodel.MovieDetail
+import java.lang.StringBuilder
 
 class DetailActivityPresenter(
     private var detailView: DetailView?,
@@ -15,7 +17,20 @@ class DetailActivityPresenter(
     }
 
     override fun onCreditResultSuccess(jsonData: String) {
-        detailView?.showCastList(convertJsonToCredit(jsonData).cast)
+
+        val credit = convertJsonToCredit(jsonData)
+        detailView?.showCastList(credit.cast)
+
+        val directorString = StringBuilder()
+        val writerString = StringBuilder()
+        for (crew in credit.crew) {
+            if (crew.job == Constants.MOVIE_CREW_JOB_DIRECTOR) {
+                directorString.append(crew.name + ", ")
+            } else if (crew.department == Constants.MOVIE_CREW_DEPARTMENT_WRITING) {
+                writerString.append(crew.name + ", ")
+            }
+        }
+        detailView?.showCrew(removeLastChar(directorString.toString()), removeLastChar(writerString.toString()))
     }
 
     override fun onResultFail() {
@@ -40,7 +55,15 @@ class DetailActivityPresenter(
         return gson.fromJson(jsonData, MovieCredit::class.java)
     }
 
-    fun onDestoy() {
+    private fun removeLastChar(string: String): String {
+        var str = string
+        if (str.isNotEmpty()) {
+            str = str.substring(0, str.length - 2)
+        }
+        return str
+    }
+
+    fun onDestroy() {
         detailView = null
     }
 }
