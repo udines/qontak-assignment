@@ -4,12 +4,11 @@ import android.util.Log
 import com.google.gson.Gson
 import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.Movie
-import org.json.JSONObject
+import com.qontak.assignment.datamodel.MovieList
 
 
-
-class MainActivityPresenter(private var mainView: MainView?, private val mainInteractor: MainActivityInteractor)
-    : MainActivityInteractor.OnFinishedListener {
+class MainActivityPresenter(private var mainView: MainView?, private val mainInteractor: MainActivityInteractor) :
+    MainActivityInteractor.OnFinishedListener {
 
     private var pageIndex: Int = 0
     private var savedFilter: String = ""
@@ -76,20 +75,9 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
     }
 
     private fun convertJsonToArrayList(jsonData: String): ArrayList<Movie> {
-
-        val jsonObject = JSONObject(jsonData)
-        val jsonArray = jsonObject.getJSONArray("results")
-
-        val movieList = ArrayList<Movie>()
-
-        for (i in 0 until jsonArray.length()) {
-            val jObject = jsonArray.getJSONObject(i)
-            val gson = Gson()
-            val movie = gson.fromJson(jObject.toString(), Movie::class.java)
-            movieList.add(movie)
-        }
-
-        return movieList
+        val gson = Gson()
+        val movieList = gson.fromJson(jsonData, MovieList::class.java)
+        return ArrayList(movieList.results)
     }
 
     fun onDestroy() {

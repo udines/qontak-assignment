@@ -53,7 +53,7 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(movie: Movie, context: Context) {
         title.text = movie.title
         GlideApp.with(context)
-            .load(Constants.BASE_URL_POSTER + "w300" + movie.poster_path)
+            .load(Constants.BASE_URL_POSTER + "w300" + movie.posterPath)
             .transition(
                 DrawableTransitionOptions
                     .withCrossFade()

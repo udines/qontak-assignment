@@ -42,7 +42,7 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
             movie_detail_subtitle.text = movieDetail.tagline
 
             GlideApp.with(this)
-                .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.poster_path)
+                .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.posterPath)
                 .into(movie_detail_poster_image)
         }
 
