@@ -7,13 +7,22 @@ import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
 import com.qontak.assignment.datamodel.Cast
-import com.qontak.assignment.datamodel.MovieDetail
 
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.content_movie_detail.*
 
 interface DetailView {
-    fun displayMovieDetail(movieDetail: MovieDetail)
+    fun showDetails(
+        title: String,
+        subtitle: String,
+        rating: String,
+        status: String,
+        date: String,
+        country: String,
+        language: String,
+        posterPath: String
+    )
+
     fun showCastList(castList: List<Cast>)
     fun showCrew(director: String, writers: String)
     fun showStoryline(summary: String, tagline: String, genres: String)
@@ -35,16 +44,28 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
 
     }
 
-    override fun displayMovieDetail(movieDetail: MovieDetail) {
-
+    override fun showDetails(
+        title: String,
+        subtitle: String,
+        rating: String,
+        status: String,
+        date: String,
+        country: String,
+        language: String,
+        posterPath: String
+    ) {
         runOnUiThread {
             // Stuff that updates the UI
-            movieDetailTitle.text = movieDetail.title
-            movieDetailOverview.text = movieDetail.overview
-            movieDetailSubtitle.text = movieDetail.tagline
+            movieDetailTitle.text = title
+            movieDetailSubtitle.text = subtitle
+            movieDetailRating.text = rating
+            movieDetailStatus.text = status
+            movieDetailDateReleased.text = date
+            movieDetailLanguage.text = language
+            movieDetailCountry.text = country
 
             GlideApp.with(this)
-                .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.posterPath)
+                .load(Constants.BASE_URL_IMAGE + "w500" + posterPath)
                 .into(movieDetailPosterImage)
         }
     }
