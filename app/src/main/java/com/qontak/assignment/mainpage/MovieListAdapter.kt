@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
 import com.qontak.assignment.datamodel.Movie
@@ -17,6 +18,9 @@ import kotlinx.android.synthetic.main.card_movie_grid.view.*
 
 class MovieListAdapter(private val context: Context, private val movieList : ArrayList<Movie>):
     RecyclerView.Adapter<ViewHolder>() {
+
+
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.card_movie_grid, p0, false)
         val viewHolder = ViewHolder(view)
@@ -39,13 +43,7 @@ class MovieListAdapter(private val context: Context, private val movieList : Arr
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.title.text = movieList[p1].title
-        GlideApp.with(context)
-            .load("https://image.tmdb.org/t/p/w300" + movieList[p1].poster_path)
-            .transition(
-                DrawableTransitionOptions
-                    .withCrossFade())
-            .into(p0.image)
+        p0.bind(movieList[p1], context)
     }
 
 }
@@ -53,4 +51,14 @@ class MovieListAdapter(private val context: Context, private val movieList : Arr
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var title: TextView = itemView.card_movie_grid_title
     var image: ImageView = itemView.card_movie_grid_image
+
+    fun bind(movie: Movie, context: Context) {
+        title.text = movie.title
+        GlideApp.with(context)
+            .load(Constants.BASE_URL_POSTER_W300 + movie.poster_path)
+            .transition(
+                DrawableTransitionOptions
+                    .withCrossFade())
+            .into(image)
+    }
 }
