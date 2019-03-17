@@ -5,5 +5,5 @@ object Constants {
     const val BASE_URL_API = "https://api.themoviedb.org/3/"
     const val FILTER_TOP_RATED = "top_rated"
     const val FILTER_POPULAR = "popular"
-    const val BASE_URL_POSTER = "https://image.tmdb.org/t/p/"
+    const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/"
 }

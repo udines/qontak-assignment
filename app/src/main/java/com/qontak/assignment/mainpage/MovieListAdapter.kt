@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
@@ -47,17 +45,14 @@ class MovieListAdapter(private val context: Context, private val movieList: Arra
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private var title: TextView = itemView.cardMovieGridTitle
-    private var image: ImageView = itemView.cardMovieGridImage
-
     fun bind(movie: Movie, context: Context) {
-        title.text = movie.title
+        itemView.cardMovieGridTitle.text = movie.title
         GlideApp.with(context)
-            .load(Constants.BASE_URL_POSTER + "w300" + movie.posterPath)
+            .load(Constants.BASE_URL_IMAGE + "w300" + movie.posterPath)
             .transition(
                 DrawableTransitionOptions
                     .withCrossFade()
             )
-            .into(image)
+            .into(itemView.cardMovieGridImage)
     }
 }
