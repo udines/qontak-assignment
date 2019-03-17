@@ -12,6 +12,10 @@ import com.qontak.assignment.R
 import kotlinx.android.synthetic.main.content_main.*
 
 
+interface MainView {
+    fun showList(movieList: ArrayList<Movie>)
+}
+
 class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -87,8 +91,4 @@ class MainActivity : AppCompatActivity(), MainView {
             mainPresenter.getData(1, Constants.FILTER_TOP_RATED)
         }
     }
-}
-
-interface MainView {
-    fun showList(movieList: ArrayList<Movie>)
 }
