@@ -27,7 +27,23 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/search"/>
         </FrameLayout>
-        
+
+        <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:orientation="horizontal">
+			<Button
+                android:id="@+id/main_button_filter_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/popular" />
+            <Button
+                android:id="@+id/main_button_filter_top_rated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rated"/>
+		</LinearLayout>
+
     </android.support.design.widget.AppBarLayout>
     
     <include layout="@layout/content_main"/>
