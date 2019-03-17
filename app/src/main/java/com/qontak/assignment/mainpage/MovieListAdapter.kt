@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
 import com.qontak.assignment.datamodel.Movie
@@ -41,6 +42,9 @@ class MovieListAdapter(private val context: Context, private val movieList : Arr
         p0.title.text = movieList[p1].title
         GlideApp.with(context)
             .load("https://image.tmdb.org/t/p/w300" + movieList[p1].poster_path)
+            .transition(
+                DrawableTransitionOptions
+                    .withCrossFade())
             .into(p0.image)
     }
 
