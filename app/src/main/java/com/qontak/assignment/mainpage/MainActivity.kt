@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), MainView {
         //instantiate layout manager and attach to recycler view
         gridLayoutManager = GridLayoutManager(this, 2)
         main_recycler_view.layoutManager = gridLayoutManager
+        main_recycler_view.isNestedScrollingEnabled = false
 
         //instantiate Presenter
         mainPresenter = MainActivityPresenter(this, MainActivityInteractor())
