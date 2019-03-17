@@ -15,11 +15,11 @@ import com.qontak.assignment.detailpage.MovieDetailActivity
 import kotlinx.android.synthetic.main.card_movie_grid.view.*
 
 class MovieListAdapter(private val context: Context, private val movieList: ArrayList<Movie>) :
-    RecyclerView.Adapter<ViewHolder>() {
+    RecyclerView.Adapter<MovieViewHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MovieViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.card_movie_grid, p0, false)
-        val viewHolder = ViewHolder(view)
+        val viewHolder = MovieViewHolder(view)
 
         //handle movie item on click
         view.setOnClickListener {
@@ -38,13 +38,13 @@ class MovieListAdapter(private val context: Context, private val movieList: Arra
         return movieList.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: MovieViewHolder, p1: Int) {
         p0.bind(movieList[p1], context)
     }
 
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(movie: Movie, context: Context) {
         itemView.cardMovieGridTitle.text = movie.title
         GlideApp.with(context)
