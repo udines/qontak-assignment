@@ -13,7 +13,20 @@ class DetailActivityPresenter(
 ) : DetailActivityInteractor.OnFinishedListener {
 
     override fun onResultSuccess(jsonData: String) {
-        detailView?.displayMovieDetail(convertJsonToMovieDetail(jsonData))
+        val movieDetail = convertJsonToMovieDetail(jsonData)
+        val genreString = StringBuilder()
+
+        detailView?.displayMovieDetail(movieDetail)
+
+        for (genre in movieDetail.genres) {
+            genreString.append(genre.name + ", ")
+        }
+
+        detailView?.showStoryline(
+            movieDetail.overview,
+            movieDetail.tagline,
+            removeLastChar(genreString.toString())
+        )
     }
 
     override fun onCreditResultSuccess(jsonData: String) {

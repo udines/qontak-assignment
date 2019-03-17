@@ -16,6 +16,7 @@ interface DetailView {
     fun displayMovieDetail(movieDetail: MovieDetail)
     fun showCastList(castList: List<Cast>)
     fun showCrew(director: String, writers: String)
+    fun showStoryline(summary: String, tagline: String, genres: String)
 }
 
 class MovieDetailActivity : AppCompatActivity(), DetailView {
@@ -61,6 +62,14 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
         runOnUiThread {
             movieDetailDirector.text = director
             movieDetailWriters.text = writers
+        }
+    }
+
+    override fun showStoryline(summary: String, tagline: String, genres: String) {
+        runOnUiThread {
+            movieDetailPlotSummary.text = summary
+            movieDetailTagline.text = tagline
+            movieDetailGenres.text = genres
         }
     }
 
