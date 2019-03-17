@@ -5,4 +5,18 @@
     <string name="search">Search</string>
     <string name="title_activity_movie_detail">Movie Detail</string>
     <string name="load_more">Load more..</string>
+    <string name="summary">Summary</string>
+    <string name="director">Director</string>
+    <string name="writers">Writers</string>
+    <string name="details">Details</string>
+    <string name="released">Released</string>
+    <string name="country_of_origin">Country of Origin</string>
+    <string name="cast">Cast</string>
+    <string name="genres">Genres</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="tagline">Tagline</string>
+    <string name="plot_summary">Plot Summary</string>
+    <string name="storyline">Storyline</string>
+    <string name="language_spoken">Language Spoken</string>
+    <string name="favorite">Favorite</string>
 </resources>
