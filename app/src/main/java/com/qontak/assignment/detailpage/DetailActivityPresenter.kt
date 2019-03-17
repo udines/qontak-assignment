@@ -6,6 +6,8 @@ import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.MovieCredit
 import com.qontak.assignment.datamodel.MovieDetail
 import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailActivityPresenter(
     private var detailView: DetailView?,
@@ -14,18 +16,43 @@ class DetailActivityPresenter(
 
     override fun onResultSuccess(jsonData: String) {
         val movieDetail = convertJsonToMovieDetail(jsonData)
+
         val genreString = StringBuilder()
-
-        detailView?.displayMovieDetail(movieDetail)
-
         for (genre in movieDetail.genres) {
             genreString.append(genre.name + ", ")
         }
-
         detailView?.showStoryline(
             movieDetail.overview,
             movieDetail.tagline,
             removeLastChar(genreString.toString())
+        )
+
+        val subtitleString = StringBuilder()
+        val countryString = StringBuilder()
+        val languageString = StringBuilder()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val newDateFormat = SimpleDateFormat("d MMMM yyyy", Locale.getDefault())
+        val rating = movieDetail.voteAverage.toString() + " /10"
+        val date = Date()
+
+        subtitleString.append(movieDetail.runtime).append("min  ").append(removeLastChar(genreString.toString()))
+        for (country in movieDetail.productionCountries) {
+            countryString.append(country.name + ", ")
+        }
+        for (language in movieDetail.spokenLanguages) {
+            languageString.append(language.name + ", ")
+        }
+        date.time = dateFormat.parse(movieDetail.releaseDate).time
+
+        detailView?.showDetails(
+            movieDetail.title,
+            subtitleString.toString(),
+            rating,
+            movieDetail.status,
+            newDateFormat.format(date),
+            removeLastChar(countryString.toString()),
+            removeLastChar(languageString.toString()),
+            movieDetail.posterPath
         )
     }
 
