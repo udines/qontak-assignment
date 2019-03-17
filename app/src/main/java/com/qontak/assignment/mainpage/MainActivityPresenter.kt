@@ -11,6 +11,8 @@ import org.json.JSONObject
 class MainActivityPresenter(private var mainView: MainView?, private val mainInteractor: MainActivityInteractor)
     : MainActivityInteractor.OnFinishedListener {
 
+    private var pageIndex: Int = 0
+
     override fun onResultSuccess(jsonData: String) {
 
         //pass processed data to main activity
@@ -27,7 +29,11 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         Log.e("result", "fail")
     }
 
-    fun getData(page: Int, filter: String) {
+
+    fun getData(filter: String) {
+
+        //set page index to 1 for initial
+        pageIndex = 1
 
         //show progress bar in main activity
         mainView?.showProgressBar()
@@ -39,9 +45,9 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         mainView?.hideRecyclerView()
 
         when (filter) {
-            Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, page)
-            Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, page)
-            else -> mainInteractor.searchMovieByTitle(this, page, filter)
+            Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, pageIndex)
+            Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, pageIndex)
+            else -> mainInteractor.searchMovieByTitle(this, pageIndex, filter)
         }
     }
 

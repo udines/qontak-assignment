@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), MainView {
                 if (query != null) {
 
                     //use query data as input to the getData method
-                    mainPresenter.getData(1, query)
+                    mainPresenter.getData(query)
                 }
                 return false
             }
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onStart() {
         //get initial movie list
         //page input set to 1 as initial
-        mainPresenter.getData(1, Constants.FILTER_POPULAR)
+        mainPresenter.getData(Constants.FILTER_POPULAR)
 
         super.onStart()
     }
@@ -136,10 +136,11 @@ class MainActivity : AppCompatActivity(), MainView {
         //get movie data based on filter
         //page is set to 1 as initial
         main_button_filter_popular.setOnClickListener {
-            mainPresenter.getData(1, Constants.FILTER_POPULAR)
+            mainPresenter.getData(Constants.FILTER_POPULAR)
         }
         main_button_filter_top_rated.setOnClickListener {
-            mainPresenter.getData(1, Constants.FILTER_TOP_RATED)
+            mainPresenter.getData(Constants.FILTER_TOP_RATED)
+        }
         }
     }
 }
