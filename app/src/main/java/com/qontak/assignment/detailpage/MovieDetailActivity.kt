@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.content_movie_detail.*
 interface DetailView {
     fun displayMovieDetail(movieDetail: MovieDetail)
     fun showCastList(castList: List<Cast>)
+    fun showCrew(director: String, writers: String)
 }
 
 class MovieDetailActivity : AppCompatActivity(), DetailView {
@@ -56,6 +57,13 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
         }
     }
 
+    override fun showCrew(director: String, writers: String) {
+        runOnUiThread {
+            movieDetailDirector.text = director
+            movieDetailWriters.text = writers
+        }
+    }
+
     override fun onStart() {
         //get movie data based on id from previous activity
         val id = intent.getIntExtra("movieId", 0)
@@ -65,7 +73,7 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
     }
 
     override fun onDestroy() {
-        detailPresenter.onDestoy()
+        detailPresenter.onDestroy()
         super.onDestroy()
     }
 }
