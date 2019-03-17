@@ -34,10 +34,6 @@ class MainActivity : AppCompatActivity(), MainView {
         //instantiate Presenter
         mainPresenter = MainActivityPresenter(this, MainActivityInteractor())
 
-        //get initial movie list
-        //page input set to 1 as initial
-        mainPresenter.getData(1, Constants.FILTER_POPULAR)
-
         //handle filter button on clicks
         handleButtonOnClicks()
     }
@@ -74,6 +70,13 @@ class MainActivity : AppCompatActivity(), MainView {
         })
 
         return true
+    }
+
+    override fun onStart() {
+        //get initial movie list
+        //page input set to 1 as initial
+        mainPresenter.getData(1, Constants.FILTER_POPULAR)
+        super.onStart()
     }
 
     override fun onDestroy() {
