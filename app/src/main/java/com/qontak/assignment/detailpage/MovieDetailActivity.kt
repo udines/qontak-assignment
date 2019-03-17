@@ -2,9 +2,11 @@ package com.qontak.assignment.detailpage
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
+import com.qontak.assignment.datamodel.Cast
 import com.qontak.assignment.datamodel.MovieDetail
 
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.content_movie_detail.*
 
 interface DetailView {
     fun displayMovieDetail(movieDetail: MovieDetail)
+    fun showCastList(castList: List<Cast>)
 }
 
 class MovieDetailActivity : AppCompatActivity(), DetailView {
@@ -28,9 +31,6 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
         //instantiate Presenter
         detailPresenter = DetailActivityPresenter(this, DetailActivityInteractor())
 
-        //get movie data based on id from previous activity
-        val id = intent.getIntExtra("movieId", 0)
-        detailPresenter.getData(id)
     }
 
     override fun displayMovieDetail(movieDetail: MovieDetail) {
@@ -45,7 +45,23 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
                 .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.posterPath)
                 .into(movieDetailPosterImage)
         }
+    }
 
+    override fun showCastList(castList: List<Cast>) {
+        runOnUiThread {
+            val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = CastListAdapter(this, castList)
+            movieDetailRecyclerViewCast.layoutManager = linearLayoutManager
+            movieDetailRecyclerViewCast.adapter = adapter
+        }
+    }
+
+    override fun onStart() {
+        //get movie data based on id from previous activity
+        val id = intent.getIntExtra("movieId", 0)
+        detailPresenter.getData(id)
+        detailPresenter.getCreditData(id)
+        super.onStart()
     }
 
     override fun onDestroy() {
