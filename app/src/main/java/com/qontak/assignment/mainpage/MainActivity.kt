@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
+import android.view.View
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.Movie
@@ -14,6 +15,12 @@ import kotlinx.android.synthetic.main.content_main.*
 
 interface MainView {
     fun showList(movieList: ArrayList<Movie>)
+    fun showProgressBar()
+    fun hideProgressBar()
+    fun showLoadMoreButton()
+    fun hideLoadMoreButton()
+    fun showRecyclerView()
+    fun hideRecyclerView()
 }
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -44,6 +51,45 @@ class MainActivity : AppCompatActivity(), MainView {
             // Stuff that updates the UI
             adapter = MovieListAdapter(this, movieList)
             main_recycler_view.adapter = adapter
+
+            //show recycler view after adapter attached
+            showRecyclerView()
+        }
+    }
+
+    override fun showProgressBar() {
+        runOnUiThread {
+            main_progress_bar.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideProgressBar() {
+        runOnUiThread {
+            main_progress_bar.visibility = View.GONE
+        }
+    }
+
+    override fun showLoadMoreButton() {
+        runOnUiThread {
+            main_button_load_more.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideLoadMoreButton() {
+        runOnUiThread {
+            main_button_load_more.visibility = View.GONE
+        }
+    }
+
+    override fun showRecyclerView() {
+        runOnUiThread {
+            main_recycler_view.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideRecyclerView() {
+        runOnUiThread {
+            main_recycler_view.visibility = View.GONE
         }
     }
 
@@ -77,6 +123,7 @@ class MainActivity : AppCompatActivity(), MainView {
         //get initial movie list
         //page input set to 1 as initial
         mainPresenter.getData(1, Constants.FILTER_POPULAR)
+
         super.onStart()
     }
 

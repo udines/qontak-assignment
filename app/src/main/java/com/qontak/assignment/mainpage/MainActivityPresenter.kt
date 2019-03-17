@@ -12,7 +12,15 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
     : MainActivityInteractor.OnFinishedListener {
 
     override fun onResultSuccess(jsonData: String) {
+
+        //pass processed data to main activity
         mainView?.showList(convertJsonToArrayList(jsonData))
+
+        //hide progress bar
+        mainView?.hideProgressBar()
+
+        //show load more button
+        mainView?.showLoadMoreButton()
     }
 
     override fun onResultFail() {
@@ -20,6 +28,16 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
     }
 
     fun getData(page: Int, filter: String) {
+
+        //show progress bar in main activity
+        mainView?.showProgressBar()
+
+        //hide load more button
+        mainView?.hideLoadMoreButton()
+
+        //hide recycler view while loading data
+        mainView?.hideRecyclerView()
+
         when (filter) {
             Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, page)
             Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, page)
