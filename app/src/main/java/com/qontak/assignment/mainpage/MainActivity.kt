@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
+import android.view.View
+import android.widget.Toast
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.Movie
@@ -23,13 +25,19 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(com.qontak.assignment.R.layout.activity_main)
         setSupportActionBar(main_toolbar)
 
+        //instantiate layout manager and attach to recycler view
         gridLayoutManager = GridLayoutManager(this, 2)
         main_recycler_view.layoutManager = gridLayoutManager
 
+        //instantiate Presenter
         mainPresenter = MainActivityPresenter(this, MainActivityInteractor())
 
         //get initial movie list
+        //page input set to 1 as initial
         mainPresenter.getData(1, Constants.FILTER_POPULAR)
+
+        //handle filter button on clicks
+        handleButtonOnClicks()
     }
 
     override fun showList(movieList: ArrayList<Movie>) {
@@ -40,6 +48,7 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
+    //handle search input
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main_search_view, menu)
 
@@ -49,6 +58,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
+
+                    //use query data as input to the getData method
                     mainPresenter.getData(1, query)
                 }
                 return false
@@ -68,6 +79,16 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onDestroy()
     }
 
+    private fun handleButtonOnClicks() {
+        //get movie data based on filter
+        //page is set to 1 as initial
+        main_button_filter_popular.setOnClickListener {
+            mainPresenter.getData(1, Constants.FILTER_POPULAR)
+        }
+        main_button_filter_top_rated.setOnClickListener {
+            mainPresenter.getData(1, Constants.FILTER_TOP_RATED)
+        }
+    }
 }
 
 interface MainView {
