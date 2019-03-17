@@ -16,10 +16,8 @@ import com.qontak.assignment.datamodel.Movie
 import com.qontak.assignment.detailpage.MovieDetailActivity
 import kotlinx.android.synthetic.main.card_movie_grid.view.*
 
-class MovieListAdapter(private val context: Context, private val movieList : ArrayList<Movie>):
+class MovieListAdapter(private val context: Context, private val movieList: ArrayList<Movie>) :
     RecyclerView.Adapter<ViewHolder>() {
-
-
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.card_movie_grid, p0, false)
@@ -49,16 +47,17 @@ class MovieListAdapter(private val context: Context, private val movieList : Arr
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var title: TextView = itemView.card_movie_grid_title
-    var image: ImageView = itemView.card_movie_grid_image
+    private var title: TextView = itemView.card_movie_grid_title
+    private var image: ImageView = itemView.card_movie_grid_image
 
     fun bind(movie: Movie, context: Context) {
         title.text = movie.title
         GlideApp.with(context)
-            .load(Constants.BASE_URL_POSTER_W300 + movie.poster_path)
+            .load(Constants.BASE_URL_POSTER + "w300" + movie.poster_path)
             .transition(
                 DrawableTransitionOptions
-                    .withCrossFade())
+                    .withCrossFade()
+            )
             .into(image)
     }
 }

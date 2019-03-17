@@ -14,7 +14,8 @@ class DetailActivityInteractor {
 
     fun getMovieDetail(onFinishedListener: OnFinishedListener, id: Int) {
 
-        val url = "https://api.themoviedb.org/3/movie/" + id.toString() + "?api_key=" + Constants.API_KEY + "&language=en-US"
+        val url =
+            Constants.BASE_URL_API + "movie/" + id.toString() + "?api_key=" + Constants.API_KEY + "&language=en-US"
 
         val client = OkHttpClient()
         val request = Request.Builder()

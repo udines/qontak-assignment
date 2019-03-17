@@ -2,6 +2,7 @@ package com.qontak.assignment.detailpage
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
 import com.qontak.assignment.datamodel.MovieDetail
@@ -41,7 +42,7 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
             movie_detail_subtitle.text = movieDetail.tagline
 
             GlideApp.with(this)
-                .load("https://image.tmdb.org/t/p/w300" + movieDetail.poster_path)
+                .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.poster_path)
                 .into(movie_detail_poster_image)
         }
 
