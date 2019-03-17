@@ -44,6 +44,26 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         //hide recycler view while loading data
         mainView?.hideRecyclerView()
 
+        //get movie data based on filter or search query
+        when (filter) {
+            Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, pageIndex)
+            Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, pageIndex)
+            else -> mainInteractor.searchMovieByTitle(this, pageIndex, filter)
+        }
+    }
+
+    fun getMoreData(filter: String) {
+
+        //increment page index by 1
+        pageIndex++
+
+        //show progress bar in main activity
+        mainView?.showProgressBar()
+
+        //hide load more button
+        mainView?.hideLoadMoreButton()
+
+        //get movie data based on filter or search query
         when (filter) {
             Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, pageIndex)
             Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, pageIndex)
