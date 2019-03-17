@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="160dp"
+    android:layout_width="120dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp"
-    android:layout_marginEnd="6dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
-    android:layout_marginStart="2dp"
+    android:layout_margin="6dp"
     app:cardElevation="2dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -44,7 +41,10 @@
             android:id="@+id/cardMovieCastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
             android:lines="2"
             android:maxLines="2"/>
     </LinearLayout>
