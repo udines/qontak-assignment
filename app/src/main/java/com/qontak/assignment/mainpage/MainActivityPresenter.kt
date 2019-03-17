@@ -12,11 +12,12 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
     : MainActivityInteractor.OnFinishedListener {
 
     private var pageIndex: Int = 0
+    private var savedFilter: String = ""
 
     override fun onResultSuccess(jsonData: String) {
 
         //pass processed data to main activity
-        mainView?.showList(convertJsonToArrayList(jsonData))
+        mainView?.showList(convertJsonToArrayList(jsonData), pageIndex > 1)
 
         //hide progress bar
         mainView?.hideProgressBar()
@@ -35,6 +36,9 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         //set page index to 1 for initial
         pageIndex = 1
 
+        //save filter for later use to get more data
+        savedFilter = filter
+
         //show progress bar in main activity
         mainView?.showProgressBar()
 
@@ -52,7 +56,7 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         }
     }
 
-    fun getMoreData(filter: String) {
+    fun getMoreData() {
 
         //increment page index by 1
         pageIndex++
@@ -64,10 +68,10 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         mainView?.hideLoadMoreButton()
 
         //get movie data based on filter or search query
-        when (filter) {
+        when (savedFilter) {
             Constants.FILTER_POPULAR -> mainInteractor.getPopularMovies(this, pageIndex)
             Constants.FILTER_TOP_RATED -> mainInteractor.getTopRatedMovies(this, pageIndex)
-            else -> mainInteractor.searchMovieByTitle(this, pageIndex, filter)
+            else -> mainInteractor.searchMovieByTitle(this, pageIndex, savedFilter)
         }
     }
 

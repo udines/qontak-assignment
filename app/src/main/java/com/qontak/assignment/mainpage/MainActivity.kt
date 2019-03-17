@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.content_main.*
 
 
 interface MainView {
-    fun showList(movieList: ArrayList<Movie>)
+    fun showList(movieList: ArrayList<Movie>, isNextPage: Boolean)
     fun showProgressBar()
     fun hideProgressBar()
     fun showLoadMoreButton()
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var adapter: MovieListAdapter
     private lateinit var mainPresenter: MainActivityPresenter
+    private var globalMovieList = ArrayList<Movie>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +47,25 @@ class MainActivity : AppCompatActivity(), MainView {
         handleButtonOnClicks()
     }
 
-    override fun showList(movieList: ArrayList<Movie>) {
+    override fun showList(movieList: ArrayList<Movie>, isNextPage: Boolean) {
         runOnUiThread {
             // Stuff that updates the UI
-            adapter = MovieListAdapter(this, movieList)
-            main_recycler_view.adapter = adapter
 
-            //show recycler view after adapter attached
-            showRecyclerView()
+            if (isNextPage) {
+                globalMovieList.addAll(movieList)
+                adapter = MovieListAdapter(this, globalMovieList)
+                main_recycler_view.adapter = adapter
+
+                //no need to show recycler view because it is not hidden
+
+            } else {
+                globalMovieList = movieList
+                adapter = MovieListAdapter(this, globalMovieList)
+                main_recycler_view.adapter = adapter
+
+                //show recycler view after adapter notified
+                showRecyclerView()
+            }
         }
     }
 
@@ -141,6 +153,10 @@ class MainActivity : AppCompatActivity(), MainView {
         main_button_filter_top_rated.setOnClickListener {
             mainPresenter.getData(Constants.FILTER_TOP_RATED)
         }
+
+        //handle load more button
+        main_button_load_more.setOnClickListener {
+            mainPresenter.getMoreData()
         }
     }
 }
