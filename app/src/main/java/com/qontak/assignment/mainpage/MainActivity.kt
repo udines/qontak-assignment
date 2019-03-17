@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.qontak.assignment.R.layout.activity_main)
-        setSupportActionBar(main_toolbar)
+        setSupportActionBar(mainToolbar)
 
         //instantiate layout manager and attach to recycler view
         gridLayoutManager = GridLayoutManager(this, 2)
-        main_recycler_view.layoutManager = gridLayoutManager
-        main_recycler_view.isNestedScrollingEnabled = false
+        mainRecyclerView.layoutManager = gridLayoutManager
+        mainRecyclerView.isNestedScrollingEnabled = false
 
         //instantiate Presenter
         mainPresenter = MainActivityPresenter(this, MainActivityInteractor())
@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity(), MainView {
             if (isNextPage) {
                 globalMovieList.addAll(movieList)
                 adapter = MovieListAdapter(this, globalMovieList)
-                main_recycler_view.adapter = adapter
+                mainRecyclerView.adapter = adapter
 
                 //no need to show recycler view because it is not hidden
 
             } else {
                 globalMovieList = movieList
                 adapter = MovieListAdapter(this, globalMovieList)
-                main_recycler_view.adapter = adapter
+                mainRecyclerView.adapter = adapter
 
                 //show recycler view after adapter notified
                 showRecyclerView()
@@ -71,37 +71,37 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun showProgressBar() {
         runOnUiThread {
-            main_progress_bar.visibility = View.VISIBLE
+            mainProgressBar.visibility = View.VISIBLE
         }
     }
 
     override fun hideProgressBar() {
         runOnUiThread {
-            main_progress_bar.visibility = View.GONE
+            mainProgressBar.visibility = View.GONE
         }
     }
 
     override fun showLoadMoreButton() {
         runOnUiThread {
-            main_button_load_more.visibility = View.VISIBLE
+            mainButtonLoadMore.visibility = View.VISIBLE
         }
     }
 
     override fun hideLoadMoreButton() {
         runOnUiThread {
-            main_button_load_more.visibility = View.GONE
+            mainButtonLoadMore.visibility = View.GONE
         }
     }
 
     override fun showRecyclerView() {
         runOnUiThread {
-            main_recycler_view.visibility = View.VISIBLE
+            mainRecyclerView.visibility = View.VISIBLE
         }
     }
 
     override fun hideRecyclerView() {
         runOnUiThread {
-            main_recycler_view.visibility = View.GONE
+            mainRecyclerView.visibility = View.GONE
         }
     }
 
@@ -110,8 +110,8 @@ class MainActivity : AppCompatActivity(), MainView {
         menuInflater.inflate(R.menu.menu_main_search_view, menu)
 
         val item = menu?.findItem(R.id.action_search)
-        main_search_view.setMenuItem(item)
-        main_search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+        mainSearchView.setMenuItem(item)
+        mainSearchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
@@ -147,15 +147,15 @@ class MainActivity : AppCompatActivity(), MainView {
     private fun handleButtonOnClicks() {
         //get movie data based on filter
         //page is set to 1 as initial
-        main_button_filter_popular.setOnClickListener {
+        mainButtonFilterPopular.setOnClickListener {
             mainPresenter.getData(Constants.FILTER_POPULAR)
         }
-        main_button_filter_top_rated.setOnClickListener {
+        mainButtonFilterTopRated.setOnClickListener {
             mainPresenter.getData(Constants.FILTER_TOP_RATED)
         }
 
         //handle load more button
-        main_button_load_more.setOnClickListener {
+        mainButtonLoadMore.setOnClickListener {
             mainPresenter.getMoreData()
         }
     }

@@ -4,8 +4,10 @@ import android.util.Log
 import com.google.gson.Gson
 import com.qontak.assignment.datamodel.MovieDetail
 
-class DetailActivityPresenter(private var detailView: DetailView?, private val detailInteractor: DetailActivityInteractor)
-    : DetailActivityInteractor.OnFinishedListener {
+class DetailActivityPresenter(
+    private var detailView: DetailView?,
+    private val detailInteractor: DetailActivityInteractor
+) : DetailActivityInteractor.OnFinishedListener {
 
     override fun onResultSuccess(jsonData: String) {
         detailView?.displayMovieDetail(convertJsonToMovieDetail(jsonData))

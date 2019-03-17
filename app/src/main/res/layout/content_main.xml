@@ -15,20 +15,20 @@
 		android:orientation="vertical">
 
 		<android.support.v7.widget.RecyclerView
-			android:id="@+id/main_recycler_view"
+			android:id="@+id/mainRecyclerView"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:padding="8dp"
 			android:clipToPadding="false"/>
 
 		<ProgressBar
-			android:id="@+id/main_progress_bar"
+			android:id="@+id/mainProgressBar"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"/>
 
 		<Button
-			android:id="@+id/main_button_load_more"
+			android:id="@+id/mainButtonLoadMore"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"

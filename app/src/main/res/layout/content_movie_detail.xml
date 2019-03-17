@@ -15,13 +15,13 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/movie_detail_title"
+            android:id="@+id/movieDetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             style="@style/Base.TextAppearance.AppCompat.Title"/>
         <TextView
-            android:id="@+id/movie_detail_subtitle"
+            android:id="@+id/movieDetailSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -39,7 +39,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1">
                 <ImageView
-                    android:id="@+id/movie_detail_poster_image"
+                    android:id="@+id/movieDetailPosterImage"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintDimensionRatio="H,27:41"
@@ -62,7 +62,7 @@
                     android:text="@string/summary"
                     android:layout_marginBottom="4dp"/>
                 <TextView
-                    android:id="@+id/movie_detail_overview"
+                    android:id="@+id/movieDetailOverview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -85,7 +85,7 @@
                     android:padding="4dp"
                     app:srcCompat="@drawable/ic_star_yellow_32dp"/>
                 <TextView
-                    android:id="@+id/movie_detail_rating"
+                    android:id="@+id/movieDetailRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -98,7 +98,7 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
-                    android:id="@+id/movie_detail_image_favorite"
+                    android:id="@+id/movieDetailImageFavorite"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="4dp"
@@ -126,7 +126,7 @@
             android:text="@string/plot_summary"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/movie_detail_plot_summary"
+            android:id="@+id/movieDetailPlotSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
@@ -136,7 +136,7 @@
             android:text="@string/tagline"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/movie_detail_tagline"
+            android:id="@+id/movieDetailTagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
@@ -146,7 +146,7 @@
             android:textColor="@color/black"
             android:text="@string/synopsis"/>
         <TextView
-            android:id="@+id/movie_detail_synopsis"
+            android:id="@+id/movieDetailSynopsis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -156,7 +156,7 @@
             android:textColor="@color/black"
             android:text="@string/genres"/>
         <TextView
-            android:id="@+id/movie_detail_genres"
+            android:id="@+id/movieDetailGenres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -170,7 +170,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"/>
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/movie_detail_recycler_view_cast"
+            android:id="@+id/movieDetailRecyclerViewCast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
@@ -189,7 +189,7 @@
             android:text="@string/director"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/movie_detail_director"
+            android:id="@+id/movieDetailDirector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
@@ -199,17 +199,18 @@
             android:text="@string/writers"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/movie_detail_writers"
+            android:id="@+id/movieDetailWriters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
         <TextView
+            android:id="@+id/movieDetailStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@string/released"/>
         <TextView
-            android:id="@+id/movie_detail_date_released"
+            android:id="@+id/movieDetailDateReleased"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -219,7 +220,7 @@
             android:textColor="@color/black"
             android:text="@string/country_of_origin"/>
         <TextView
-            android:id="@+id/movie_detail_country"
+            android:id="@+id/movieDetailCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -229,7 +230,7 @@
             android:textColor="@color/black"
             android:text="@string/language_spoken"/>
         <TextView
-            android:id="@+id/movie_detail_language"
+            android:id="@+id/movieDetailLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />

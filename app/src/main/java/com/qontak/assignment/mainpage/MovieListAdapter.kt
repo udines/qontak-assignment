@@ -47,8 +47,8 @@ class MovieListAdapter(private val context: Context, private val movieList: Arra
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private var title: TextView = itemView.card_movie_grid_title
-    private var image: ImageView = itemView.card_movie_grid_image
+    private var title: TextView = itemView.cardMovieGridTitle
+    private var image: ImageView = itemView.cardMovieGridImage
 
     fun bind(movie: Movie, context: Context) {
         title.text = movie.title

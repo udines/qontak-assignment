@@ -37,13 +37,13 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
 
         runOnUiThread {
             // Stuff that updates the UI
-            movie_detail_title.text = movieDetail.title
-            movie_detail_overview.text = movieDetail.overview
-            movie_detail_subtitle.text = movieDetail.tagline
+            movieDetailTitle.text = movieDetail.title
+            movieDetailOverview.text = movieDetail.overview
+            movieDetailSubtitle.text = movieDetail.tagline
 
             GlideApp.with(this)
                 .load(Constants.BASE_URL_POSTER + "w300" + movieDetail.posterPath)
-                .into(movie_detail_poster_image)
+                .into(movieDetailPosterImage)
         }
 
     }
