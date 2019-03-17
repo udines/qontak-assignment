@@ -27,7 +27,7 @@ class MainActivityPresenter(private var mainView: MainView?, private val mainInt
         }
     }
 
-    fun convertJsonToArrayList(jsonData: String): ArrayList<Movie> {
+    private fun convertJsonToArrayList(jsonData: String): ArrayList<Movie> {
 
         val jsonObject = JSONObject(jsonData)
         val jsonArray = jsonObject.getJSONArray("results")
