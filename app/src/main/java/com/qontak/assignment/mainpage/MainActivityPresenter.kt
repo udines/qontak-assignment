@@ -7,8 +7,10 @@ import com.qontak.assignment.datamodel.Movie
 import com.qontak.assignment.datamodel.MovieList
 
 
-class MainActivityPresenter(private var mainView: MainView?, private val mainInteractor: MainActivityInteractor) :
-    MainActivityInteractor.OnFinishedListener {
+class MainActivityPresenter(
+    private var mainView: MainView?,
+    private val mainInteractor: MainActivityInteractor
+) : MainActivityInteractor.OnFinishedListener {
 
     private var pageIndex: Int = 0
     private var savedFilter: String = ""
