@@ -8,4 +8,6 @@ object Constants {
     const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/"
     const val MOVIE_CREW_JOB_DIRECTOR = "Director"
     const val MOVIE_CREW_DEPARTMENT_WRITING = "Writing"
+    const val PREF_NAME_AUTH = "authPreferences"
+    const val PREF_KEY_SESSION_ID = "sessionId"
 }
