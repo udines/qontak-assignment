@@ -91,8 +91,12 @@ class DetailActivityPresenter(
     }
 
     override fun onMovieFavoriteSuccess(responseCode: Int) {
-        //change favorite icon color
-        detailView?.changeFavIconColor(setToFav)
+        if (responseCode == 201) {
+            //change favorite icon color
+            detailView?.changeFavIconColor(setToFav)
+        } else {
+            Log.d("response code fav", responseCode.toString())
+        }
     }
 
     fun getData(id: Int) {
