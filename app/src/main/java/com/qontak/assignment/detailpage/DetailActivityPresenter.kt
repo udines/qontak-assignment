@@ -3,8 +3,9 @@ package com.qontak.assignment.detailpage
 import android.util.Log
 import com.google.gson.Gson
 import com.qontak.assignment.Constants
-import com.qontak.assignment.datamodel.MovieCredit
-import com.qontak.assignment.datamodel.MovieDetail
+import com.qontak.assignment.datamodel.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,9 +15,14 @@ class DetailActivityPresenter(
     private val detailInteractor: DetailActivityInteractor
 ) : DetailActivityInteractor.OnFinishedListener {
 
-    override fun onResultSuccess(jsonData: String) {
-        val movieDetail = convertJsonToMovieDetail(jsonData)
+    private var accountId = 0
+    private var sessionId = ""
+    private var setToFav = false
+    private var mediaId = 0
 
+    override fun onResultSuccess(jsonData: String) {
+
+        val movieDetail = convertJsonToMovieDetail(jsonData)
         val genreString = StringBuilder()
         for (genre in movieDetail.genres) {
             genreString.append(genre.name + ", ")
@@ -77,12 +83,32 @@ class DetailActivityPresenter(
         Log.e("result", "fail")
     }
 
+    override fun onGetAccountDetailSuccess(jsonData: String) {
+        val accountData = parseJsonToAccountData(jsonData)
+        accountId = accountData.id
+        Log.d("account id", accountId.toString())
+        detailInteractor.setMovieAsFavorite(this, accountId, sessionId, createFavoriteRequestBody(mediaId, setToFav))
+    }
+
+    override fun onMovieFavoriteSuccess(responseCode: Int) {
+        //change favorite icon color
+        detailView?.changeFavIconColor(setToFav)
+    }
+
     fun getData(id: Int) {
         detailInteractor.getMovieDetail(this, id)
     }
 
     fun getCreditData(id: Int) {
         detailInteractor.getCredit(this, id)
+    }
+
+    fun getAccountDetail(sessionId: String, setAsFav: Boolean, mediaId: Int) {
+        Log.d("detail presenter", "get account detail")
+        this.sessionId = sessionId
+        this.setToFav = setAsFav
+        this.mediaId = mediaId
+        detailInteractor.getAccountDetail(this, sessionId)
     }
 
     private fun convertJsonToMovieDetail(jsonData: String): MovieDetail {
@@ -101,6 +127,18 @@ class DetailActivityPresenter(
             str = str.substring(0, str.length - 2)
         }
         return str
+    }
+
+    private fun parseJsonToAccountData(jsonData: String): AccountData {
+        val gson = Gson()
+        return gson.fromJson(jsonData, AccountData::class.java)
+    }
+
+    private fun createFavoriteRequestBody(mediaId: Int, fav: Boolean): RequestBody {
+        val mediaType = MediaType.parse("application/json; charset=utf-8")
+        val favReqBody = MovieFavoriteRequestBody(fav, mediaId, "Movie")
+        val gson = Gson()
+        return RequestBody.create(mediaType, gson.toJson(favReqBody))
     }
 
     fun onDestroy() {
