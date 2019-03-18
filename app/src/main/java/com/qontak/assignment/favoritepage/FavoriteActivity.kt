@@ -7,7 +7,11 @@ import com.qontak.assignment.R
 
 import kotlinx.android.synthetic.main.activity_favorite.*
 
-class FavoriteActivity : AppCompatActivity() {
+interface FavoriteView {
+    fun showList()
+}
+
+class FavoriteActivity : AppCompatActivity(), FavoriteView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,4 +20,7 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun showList() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
