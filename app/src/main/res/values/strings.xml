@@ -20,4 +20,8 @@
     <string name="language_spoken">Language Spoken</string>
     <string name="favorite">Favorite</string>
     <string name="title_activity_favorite">Favorite</string>
+    <string name="tmdb_username">TMDb username</string>
+    <string name="tmdb_password">TMDb password</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Log in</string>
 </resources>
