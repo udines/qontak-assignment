@@ -22,6 +22,8 @@ class DetailActivityPresenter(
 
     override fun onResultSuccess(jsonData: String) {
 
+        detailView?.hideProgress()
+
         val movieDetail = convertJsonToMovieDetail(jsonData)
         val genreString = StringBuilder()
         for (genre in movieDetail.genres) {
@@ -100,6 +102,7 @@ class DetailActivityPresenter(
     }
 
     fun getData(id: Int) {
+        detailView?.showProgress()
         detailInteractor.getMovieDetail(this, id)
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
 import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
@@ -29,6 +30,8 @@ interface DetailView {
     fun showCrew(director: String, writers: String)
     fun showStoryline(summary: String, tagline: String, genres: String)
     fun changeFavIconColor(isFavorite: Boolean)
+    fun showProgress()
+    fun hideProgress()
 }
 
 class MovieDetailActivity : AppCompatActivity(), DetailView {
@@ -120,6 +123,20 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
     override fun onDestroy() {
         detailPresenter.onDestroy()
         super.onDestroy()
+    }
+
+
+    override fun showProgress() {
+        runOnUiThread {
+            movieDetailProgressbar.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideProgress() {
+        runOnUiThread {
+            movieDetailProgressbar.visibility = View.GONE
+        }
+
     }
 
     private fun handleButtonOnclick() {
