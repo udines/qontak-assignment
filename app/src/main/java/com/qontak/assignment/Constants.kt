@@ -10,4 +10,5 @@ object Constants {
     const val MOVIE_CREW_DEPARTMENT_WRITING = "Writing"
     const val PREF_NAME_AUTH = "authPreferences"
     const val PREF_KEY_SESSION_ID = "sessionId"
+    const val MEDIA_TYPE_MOVIE = "movie"
 }

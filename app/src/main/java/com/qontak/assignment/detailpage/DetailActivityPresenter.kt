@@ -140,7 +140,7 @@ class DetailActivityPresenter(
 
     private fun createFavoriteRequestBody(mediaId: Int, fav: Boolean): RequestBody {
         val mediaType = MediaType.parse("application/json; charset=utf-8")
-        val favReqBody = MovieFavoriteRequestBody(fav, mediaId, "Movie")
+        val favReqBody = MovieFavoriteRequestBody(fav, mediaId, Constants.MEDIA_TYPE_MOVIE)
         val gson = Gson()
         return RequestBody.create(mediaType, gson.toJson(favReqBody))
     }
