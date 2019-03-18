@@ -10,11 +10,11 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.qontak.assignment.Constants
 import com.qontak.assignment.datamodel.Movie
 import kotlinx.android.synthetic.main.activity_main.*
-import com.qontak.assignment.authentication.LoginDialog
 import com.qontak.assignment.favoritepage.FavoriteActivity
 import kotlinx.android.synthetic.main.content_main.*
 import android.content.Context
 import com.qontak.assignment.R
+import com.qontak.assignment.authentication.LoginActivity
 
 
 interface MainView {
@@ -138,13 +138,18 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onStart() {
-        //get initial movie list
-        //page input set to 1 as initial
-        mainPresenter.getData(Constants.FILTER_POPULAR)
 
-        //set button color selected for popular filter
-        mainButtonFilterPopular.setBackgroundResource(R.drawable.background_filter_button_selected)
-        mainButtonFilterTopRated.setBackgroundResource(R.drawable.background_filter_button)
+        if (sessionIdExist()) {
+            //get initial movie list
+            //page input set to 1 as initial
+            mainPresenter.getData(Constants.FILTER_POPULAR)
+
+            //set button color selected for popular filter
+            mainButtonFilterPopular.setBackgroundResource(R.drawable.background_filter_button_selected)
+            mainButtonFilterTopRated.setBackgroundResource(R.drawable.background_filter_button)
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
         super.onStart()
     }
 
@@ -173,12 +178,7 @@ class MainActivity : AppCompatActivity(), MainView {
         }
 
         mainButtonFavorite.setOnClickListener {
-            //check if session id exist
-            if (sessionIdExist()) {
-                startActivity(Intent(this, FavoriteActivity::class.java))
-            } else {
-                showLoginDialog()
-            }
+            startActivity(Intent(this, FavoriteActivity::class.java))
         }
     }
 
@@ -186,10 +186,5 @@ class MainActivity : AppCompatActivity(), MainView {
         val prefs = getSharedPreferences(Constants.PREF_NAME_AUTH, Context.MODE_PRIVATE)
         val sessionId = prefs.getString(Constants.PREF_KEY_SESSION_ID, null)
         return sessionId != null
-    }
-
-    private fun showLoginDialog() {
-        val dialog = LoginDialog()
-        dialog.show(supportFragmentManager, "login")
     }
 }
