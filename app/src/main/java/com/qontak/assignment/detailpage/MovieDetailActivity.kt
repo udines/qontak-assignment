@@ -1,8 +1,10 @@
 package com.qontak.assignment.detailpage
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.qontak.assignment.Constants
 import com.qontak.assignment.GlideApp
 import com.qontak.assignment.R
@@ -26,11 +28,13 @@ interface DetailView {
     fun showCastList(castList: List<Cast>)
     fun showCrew(director: String, writers: String)
     fun showStoryline(summary: String, tagline: String, genres: String)
+    fun changeFavIconColor(isFavorite: Boolean)
 }
 
 class MovieDetailActivity : AppCompatActivity(), DetailView {
 
     private lateinit var detailPresenter: DetailActivityPresenter
+    private var mediaId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,8 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
 
         //instantiate Presenter
         detailPresenter = DetailActivityPresenter(this, DetailActivityInteractor())
+
+        handleButtonOnclick()
 
     }
 
@@ -94,9 +100,18 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
         }
     }
 
+    override fun changeFavIconColor(isFavorite: Boolean) {
+        if (isFavorite) {
+            movieDetailImageFavorite.setImageResource(R.drawable.ic_favorite_pink_32dp)
+        } else {
+            movieDetailImageFavorite.setImageResource(R.drawable.ic_favorite_grey_32dp)
+        }
+    }
+
     override fun onStart() {
         //get movie data based on id from previous activity
         val id = intent.getIntExtra("movieId", 0)
+        this.mediaId = id
         detailPresenter.getData(id)
         detailPresenter.getCreditData(id)
         super.onStart()
@@ -105,5 +120,17 @@ class MovieDetailActivity : AppCompatActivity(), DetailView {
     override fun onDestroy() {
         detailPresenter.onDestroy()
         super.onDestroy()
+    }
+
+    private fun handleButtonOnclick() {
+        movieDetailImageFavorite.setOnClickListener {
+            Log.d("fav button", "clicked")
+            val prefs = getSharedPreferences(Constants.PREF_NAME_AUTH, Context.MODE_PRIVATE)
+            val sessionId = prefs.getString(Constants.PREF_KEY_SESSION_ID, null)
+            if (sessionId != null) {
+                Log.d("session Id", "not null")
+                detailPresenter.getAccountDetail(sessionId, true, mediaId)
+            }
+        }
     }
 }
