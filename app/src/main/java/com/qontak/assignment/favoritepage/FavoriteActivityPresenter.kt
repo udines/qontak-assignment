@@ -23,11 +23,8 @@ class FavoriteActivityPresenter(
     }
 
     override fun onGetMoviesSuccess(jsonData: String) {
-        favoriteView?.showList(convertJsonToArrayList(jsonData), pageIndex > 1)
-
+        favoriteView?.showList(convertJsonToArrayList(jsonData))
         favoriteView?.hideProgressBar()
-
-        favoriteView?.showLoadMoreButton()
     }
 
     override fun onResultFail() {
@@ -45,36 +42,18 @@ class FavoriteActivityPresenter(
     }
 
     private fun getFavoriteMovies() {
-
         pageIndex = 1
-
         favoriteView?.showProgressBar()
-
-        favoriteView?.hideLoadMoreButton()
-
-        favoriteView?.hideRecyclerView()
-
         favoriteInteractor.getFavoriteMovies(this, accountId, sessionId, pageIndex)
-    }
-
-    fun getMoreData() {
-
-        pageIndex++
-
-        favoriteView?.showProgressBar()
-
-        favoriteView?.hideLoadMoreButton()
-
-        favoriteInteractor.getFavoriteMovies(this, accountId, sessionId, pageIndex)
-    }
-
-    fun onDestroy() {
-        favoriteView = null
     }
 
     private fun convertJsonToArrayList(jsonData: String): ArrayList<Movie> {
         val gson = Gson()
         val movieList = gson.fromJson(jsonData, MovieList::class.java)
         return ArrayList(movieList.results)
+    }
+
+    fun onDestroy() {
+        favoriteView = null
     }
 }

@@ -31,17 +31,6 @@
             android:layout_marginBottom="8dp"
             android:layout_gravity="center"/>
 
-        <Button
-            android:visibility="gone"
-            android:id="@+id/favoriteButtonLoadMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/load_more"/>
-
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
