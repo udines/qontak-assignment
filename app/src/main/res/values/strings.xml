@@ -24,4 +24,7 @@
     <string name="tmdb_password">TMDb password</string>
     <string name="cancel">Cancel</string>
     <string name="login">Log in</string>
+    <string name="my_favorite">My Favorite</string>
+    <string name="login_dialog_title">Log in using TMDb credentials</string>
+    <string name="title_activity_login">Login</string>
 </resources>

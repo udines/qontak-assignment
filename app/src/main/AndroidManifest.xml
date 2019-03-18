@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".authentication.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".favoritepage.FavoriteActivity"
             android:label="@string/title_activity_favorite"
             android:parentActivityName=".mainpage.MainActivity"
