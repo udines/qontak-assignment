@@ -51,3 +51,9 @@ data class SpokenLanguage(
     @SerializedName("iso_639_1") val iso: String,
     @SerializedName("name") val name: String
 )
+
+data class MovieFavoriteRequestBody(
+    @SerializedName("favorite") val favorite: Boolean,
+    @SerializedName("media_id") val mediaId: Int,
+    @SerializedName("media_type") val mediaType: String
+)
